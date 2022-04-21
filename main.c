@@ -34,6 +34,7 @@ TaskHandle_t tempSensorHandle = NULL;
 
 
 int main() {
+	//Hej Solaiman
 	
 	//vi starter med at sætte alle variablerne til 0
 	//terrariumdata.humidity = 0;
