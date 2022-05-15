@@ -1,4 +1,11 @@
 /*
+ * loRaWanHandler.c
+ *
+ * Created: 04-05-2022 13:33:44
+ *  Author: Solaiman
+ */ 
+
+/*
 * loraWANHandler.c
 *
 * Created: 12/04/2019 10:09:05
@@ -9,22 +16,25 @@
 
 #include <ATMEGA_FreeRTOS.h>
 
+
 #include <lora_driver.h>
 #include <status_leds.h>
 
 // Parameters for OTAA join - You have got these in a mail from IHA
-#define LORA_appEUI "XXXXXXXXXXXXXXX"
-#define LORA_appKEY "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+#define LORA_appEUI "2E20554EE0BE7265"
+#define LORA_appKEY "D951DC87A928E70B1C2EDD116E87352F"
+
+static char _out_buf[100];
 
 void lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _uplink_payload;
-
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
+//(const  portCHAR *
+void lora_handler_create(UBaseType_t lora_handler_task_priority)
 {
 	xTaskCreate(
 	lora_handler_task
-	,  "LRHand"  // A name just for humans
+	, "LRHand" // A name just for humans
 	,  configMINIMAL_STACK_SIZE+200  // This stack size can be checked & adjusted by reading the Stack Highwater
 	,  NULL
 	,  lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
@@ -33,7 +43,6 @@ void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 
 static void _lora_setup(void)
 {
-	char _out_buf[20];
 	lora_driver_returnCode_t rc;
 	status_leds_slowBlink(led_ST2); // OPTIONAL: Led the green led blink slowly while we are setting up LoRa
 
@@ -107,9 +116,10 @@ static void _lora_setup(void)
 /*-----------------------------------------------------------*/
 void lora_handler_task( void *pvParameters )
 {
+	printf("kommer vi her i lora handler task?");
 	// Hardware reset of LoRaWAN transceiver
 	lora_driver_resetRn2483(1);
-	vTaskDelay(2);
+	xTaskDelayUntil(2,1);
 	lora_driver_resetRn2483(0);
 	// Give it a chance to wakeup
 	vTaskDelay(150);
@@ -127,8 +137,8 @@ void lora_handler_task( void *pvParameters )
 	
 	for(;;)
 	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-
+	    	
+		
 		// Some dummy payload
 		uint16_t hum = 12345; // Dummy humidity
 		int16_t temp = 675; // Dummy temp
@@ -143,5 +153,7 @@ void lora_handler_task( void *pvParameters )
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+		xTaskDelayUntil( &xLastWakeTime, xFrequency );
+
 	}
 }

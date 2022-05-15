@@ -24,9 +24,9 @@ FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
 
-TerrariumFiles\temperature_Sensor.c
-
-LoRaWANHandler.c
-
 main.c
+
+TerrariumFiles\loRaWanHandler.c
+
+TerrariumFiles\temperature_Sensor.c
 

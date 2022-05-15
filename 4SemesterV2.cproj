@@ -40,6 +40,23 @@
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
+    <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
+    <avrtoolserialnumber>J41800072819</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1E9801</avrdeviceexpectedsignature>
+    <com_atmel_avrdbg_tool_atmelice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <IspClock>125000</IspClock>
+          <JtagDbgClock>200000</JtagDbgClock>
+        </InterfaceProperties>
+        <InterfaceName>JTAG</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
+      <ToolNumber>J41800072819</ToolNumber>
+      <ToolName>Atmel-ICE</ToolName>
+    </com_atmel_avrdbg_tool_atmelice>
+    <avrtoolinterface>JTAG</avrtoolinterface>
+    <avrtoolinterfaceclock>125000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -146,6 +163,15 @@
     <Compile Include="drivers\hih8120.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="drivers\ihal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="drivers\iled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="drivers\i_register_access.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="drivers\lora_driver.h">
       <SubType>compile</SubType>
     </Compile>
@@ -153,6 +179,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="drivers\mh_z19.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="drivers\rcServo.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="drivers\rc_servo.h">
@@ -215,6 +244,9 @@
     <Compile Include="FreeRTOS\src\heap_4.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="FreeRTOS\src\io.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="FreeRTOS\src\list.c">
       <SubType>compile</SubType>
     </Compile>
@@ -273,6 +305,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main (3).c.example">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TerrariumFiles\HejSolaiman.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TerrariumFiles\loRaWanHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TerrariumFiles\loRaWanHandler.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TerrariumFiles\temperature_Sensor.c">
@@ -346,10 +390,10 @@
     <None Include="FreeRTOS\src\LICENSE.md">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="LoRaWANHandler.c">
+    <Compile Include="LoRaWANHandler.cds">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main.c">
+    <Compile Include="main.csds">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

@@ -35,6 +35,130 @@ void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
 int16_t temperature = 0;
 
 
+
+
+
+void loraWan_Setup ()
+{
+	
+	if (lora_driver_rn2483FactoryReset() != LORA_OK)
+	{
+		printf("går galt i factory reset \n");
+	}
+	else {
+		printf("else statement , factory reset");
+	}
+	
+	if (lora_driver_configureToEu868() != LORA_OK)
+	{
+printf("går gant i configure EU868");
+	}
+		else {
+			printf("else statement , configure to Eu868");
+		}
+	
+	
+	static char devEui[17] = "0004A30B00259F36"; // It is static to avoid it to occupy stack space in the task
+	if (lora_driver_getRn2483Hweui(devEui) != LORA_OK)
+	{
+		printf("går galt i get rn284Huewi \n");
+	}
+		else {
+			printf("else statement , rn284 heuwi");
+		}
+	
+	if (lora_driver_setOtaaIdentity("2E20554EE0BE7265","D951DC87A928E70B1C2EDD116E87352F",devEui) != LORA_OK)
+	{
+		
+		printf("går galt i set0 taa identity \n");
+		// Something went wrong
+	}
+		else {
+			printf("else statement , set taa identity");
+		}
+	
+	if (lora_driver_saveMac() != LORA_OK)
+	{
+		printf("går galt i save mac \n");
+		// Something went wrong
+	}
+	
+		else {
+			printf("else statement , save mac");
+		}
+	
+	// All parameters are now saved in the module
+	
+	if (lora_driver_join(LORA_OTAA) == LORA_ACCEPTED)
+	{
+		// You are now joined
+		printf("Joiner driveren ?");
+	}
+	else 
+	{
+		printf("else statement , joiner ikke");
+		
+	}
+}
+
+
+
+void send_Data()
+{
+	
+	lora_driver_payload_t uplinkPayload;
+
+	uplinkPayload.len = 4; // Length of the actual payload
+	uplinkPayload.portNo = 1; // The LoRaWAN port no to sent the message to
+	
+	uplinkPayload.bytes[0] = 20 >> 8;
+	uplinkPayload.bytes[1] = 20 & 0xFF;
+	uplinkPayload.bytes[2] = 30 >> 8;
+	uplinkPayload.bytes[3] = 30 & 0xFF;
+	
+	lora_driver_returnCode_t rc;
+
+	
+	
+	for(;;)
+	{
+	vTaskDelay(100)	;
+
+	
+	if ((rc = lora_driver_sendUploadMessage(false, &uplinkPayload)) == LORA_MAC_TX_OK )
+	{
+
+		
+	printf(" uplink return code, no downlink %d \n",rc);
+		// The uplink message is sent and there is no downlink message received
+	}
+	else if (rc == LORA_MAC_RX)
+	{
+		
+		printf("downlink msg ? ");
+		// The uplink message is sent and a downlink message is received
+	}
+		printf(" uplink return code %d \n",rc);
+
+	}
+	
+	
+	
+}
+
+
+void loraWan_TaskReset()
+{
+	lora_driver_resetRn2483(1); // Activate reset line
+	vTaskDelay(2);
+	lora_driver_resetRn2483(0); // Release reset line
+	vTaskDelay(150); // Wait for tranceiver module to wake up after reset
+	lora_driver_flushBuffers(); // get rid of first version string from module after reset!
+
+}
+
+
+
 /*-----------------------------------------------------------*/
 void create_tasks_and_semaphores(void)
 {
