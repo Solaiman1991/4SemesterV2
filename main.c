@@ -19,7 +19,6 @@
 //include drivers
 #include "hih8120.h"
 #include "serial.h"
-#include "TerrariumFiles/terrarium_Data.h"
 #include "stdio_driver.h"
 #include "lora_driver.h"
 
@@ -85,7 +84,7 @@ int main() {
 	xTaskCreate(tempSensorTask, "Temperature measurement", configMINIMAL_STACK_SIZE, NULL, TEMP_TASK_PRIORITY, &tempSensorHandle);
 	xTaskCreate(lora_handler_task, "Led", configMINIMAL_STACK_SIZE, NULL,4, &loRaWanHandle);
 	
-	xTaskCreate()
+	//xTaskCreate()
 
 
 	// Innitalisere semaphoren

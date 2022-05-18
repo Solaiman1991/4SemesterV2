@@ -12,7 +12,6 @@
 #include "temperature_Sensor.h"
 #include "semphr.h"
 #include "hih8120.h"
-#include "terrarium_Data.h"
 
 
 void tempSensorTask(void* pvParameters) {
@@ -35,12 +34,12 @@ void tempSensorTask(void* pvParameters) {
 		
 
 		//semaphore:
-		xSemaphoreTake(semaphore, portMAX_DELAY);
+		//xSemaphoreTake(semaphore, portMAX_DELAY);
 		
-		terrariumdata.humidity =hih8120_getHumidity();
-		terrariumdata.temperature = hih8120_getTemperature_x10();
-		printf("Fugtighed: %d%% Temperatur: %dC°\n", terrariumdata.humidity, terrariumdata.temperature);
-		xSemaphoreGive(semaphore);
+		//terrariumdata.humidity =hih8120_getHumidity();
+		//terrariumdata.temperature = hih8120_getTemperature_x10();
+		//printf("Fugtighed: %d%% Temperatur: %dC°\n", terrariumdata.humidity, terrariumdata.temperature);
+		//xSemaphoreGive(semaphore);
 
 	}
 
