@@ -304,13 +304,13 @@
     <Compile Include="FreeRTOS\src\variantHooks.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main (3).c.example">
+    <Compile Include="main.csd">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main.c">
+    <Compile Include="TerrariumFiles\dataHandler.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TerrariumFiles\HejSolaiman.h">
+    <Compile Include="TerrariumFiles\dataHandler.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TerrariumFiles\loRaWanHandler.c">
@@ -325,7 +325,13 @@
     <Compile Include="TerrariumFiles\temperature_Sensor.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TerrariumFiles\terrarium_Data.h">
+    <Compile Include="TerrariumFiles\terrarium.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TerrariumFiles\terrarium.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TerrariumFiles\terrarium_Data.hsd">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -393,7 +399,7 @@
     <Compile Include="LoRaWANHandler.cds">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main.csds">
+    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

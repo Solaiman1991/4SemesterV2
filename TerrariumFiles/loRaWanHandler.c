@@ -19,6 +19,7 @@
 
 #include <lora_driver.h>
 #include <status_leds.h>
+#include "dataHandler.h"
 
 // Parameters for OTAA join - You have got these in a mail from IHA
 #define LORA_appEUI "2E20554EE0BE7265"
@@ -137,11 +138,24 @@ void lora_handler_task( void *pvParameters )
 	
 	for(;;)
 	{
-	    	
-		
+	    Terrariumdata_p terrariumdata = (Terrariumdata_p)calloc(sizeof(Terrariumdata_p),1) ;
+
+	  
+	  int i;
+
+	  for (i = 0; i < 30; ++i)
+	  {
+		 
+		  messure(terrariumdata);
+		  vTaskDelay(10000);
+	  }
+	  prepareData(terrariumdata);
+	  
 		// Some dummy payload
+        float temperature = terrariumdata->temperature;
+
 		uint16_t hum = 12345; // Dummy humidity
-		int16_t temp = 675; // Dummy temp
+		int16_t temp = (int16_t)(terrariumdata-> temperature * 10); // Dummy temp
 		uint16_t co2_ppm = 1050; // Dummy CO2
 
 		_uplink_payload.bytes[0] = hum >> 8;
@@ -153,7 +167,7 @@ void lora_handler_task( void *pvParameters )
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
+		//xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
 	}
 }

@@ -130,7 +130,6 @@ void lora_handler_task( void *pvParameters )
 	
 	for(;;)
 	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
 		// Some dummy payload
 		uint16_t hum = 12345; // Dummy humidity
@@ -145,6 +144,8 @@ void lora_handler_task( void *pvParameters )
 		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
-		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));	
+		xTaskDelayUntil( &xLastWakeTime, xFrequency );
+
 	}
 }
