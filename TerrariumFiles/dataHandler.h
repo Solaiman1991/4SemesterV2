@@ -13,5 +13,5 @@ typedef struct Terrariumdata* Terrariumdata_p;
 void messure(Terrariumdata_p terrariumdata);
 
 void prepareData(Terrariumdata_p terrariumdata);
-
+	
 Terrariumdata_p createTerrarium();

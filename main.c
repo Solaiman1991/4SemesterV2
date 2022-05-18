@@ -59,7 +59,7 @@ int main() {
 	   //hal_create(5);
 	
 	// Create LoRaWAN task and start it up with priority 3
-	// lora_handler_create(3);
+	  lora_handler_create(3);
 	
 
 		// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
