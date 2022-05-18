@@ -307,7 +307,12 @@
     <Compile Include="main.csd">
       <SubType>compile</SubType>
     </Compile>
+<<<<<<< Updated upstream
     <Compile Include="TerrariumFiles\dataHandler.c">
+=======
+<<<<<<< Updated upstream
+    <Compile Include="main.c">
+>>>>>>> Stashed changes
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TerrariumFiles\dataHandler.h">
@@ -319,6 +324,11 @@
     <Compile Include="TerrariumFiles\loRaWanHandler.h">
       <SubType>compile</SubType>
     </Compile>
+=======
+    <Compile Include="TerrariumFiles\HejSolaiman.h">
+      <SubType>compile</SubType>
+    </Compile>
+>>>>>>> Stashed changes
     <Compile Include="TerrariumFiles\temperature_Sensor.c">
       <SubType>compile</SubType>
     </Compile>
