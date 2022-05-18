@@ -5,3 +5,4 @@
  *  Author: Solaiman
  */ 
 void tempSensorTask(void* pvParameters);
+float messureTemp();

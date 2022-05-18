@@ -46,3 +46,27 @@ void tempSensorTask(void* pvParameters) {
 
 	vTaskDelete(NULL);
 }
+
+
+float messureTemp()
+{
+	int returnCode = hih8120_wakeup();
+	if(returnCode!= HIH8120_OK && returnCode != HIH8120_TWI_BUSY) {
+		printf("Temperature wakeup error: %d\n", returnCode);
+	}
+	
+	vTaskDelay(100);
+	returnCode = hih8120_measure();
+	if (returnCode != HIH8120_OK && returnCode != HIH8120_TWI_BUSY) {
+		printf("Temperature measure error: %d\n", returnCode);
+
+	}
+	vTaskDelay(5);
+
+	//semaphore:
+	//xSemaphoreTake(semaphore, portMAX_DELAY);
+	
+	float temperature = hih8120_getTemperature();
+	printf("Fugtighed: %d%% Temperatur: %dC°\n",temperature);
+	return 	temperature;
+}
